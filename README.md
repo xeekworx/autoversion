@@ -1,5 +1,6 @@
-**Xeekworx Autoversion**
-------------------------
+![Xeekworx](http://xeekworx.com/templates/xeekworx/images/logo_small.png)
+Autoversion
+===========
 
 **Autoversion is a command-line tool written in Python that looks for preprocessor definitions in a C/C++ header file and modifies the value to increment version values.**
 
@@ -23,9 +24,18 @@ The version value separator, leading and trailing quotations, and trailing "\0" 
 
 COMMAND LINE
 ------------
+> **usage:** autoversion.py [--help] FILE [MACRO [MACRO ...]]
+> 
+> autoversion
+> 
+> **positional arguments:**
+> *FILE*        Source file to modify (required)
+> *MACRO* Macros to modify (1 or more required)
+> 
+> **optional arguments:**   --help, -?
 
 CONFIGURING VISUAL STUDIO
 -----------------------------------
-
+Comming Soon ...
 
 > Written with [StackEdit](https://stackedit.io/).
