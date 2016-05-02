@@ -25,14 +25,14 @@ The version value separator, leading and trailing quotations, and trailing "\0" 
 COMMAND LINE
 ------------
 > **usage:** autoversion.py [--help] FILE [MACRO [MACRO ...]]
-> 
+>
 > autoversion
-> 
+>
 > **positional arguments:**
-> *FILE*        Source file to modify (required)
+> *FILE* Source file to modify (required)
 > *MACRO* Macros to modify (1 or more required)
-> 
-> **optional arguments:**   --help, -?
+>
+> **optional arguments:** --help, -?
 
 CONFIGURING VISUAL STUDIO
 -----------------------------------
