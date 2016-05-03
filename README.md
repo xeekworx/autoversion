@@ -1,4 +1,4 @@
-![Xeekworx](http://xeekworx.com/templates/xeekworx/images/logo_small.png)
+![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png)
 Autoversion
 ===========
 
@@ -25,17 +25,25 @@ The version value separator, leading and trailing quotations, and trailing "\0" 
 COMMAND LINE
 ------------
 > **usage:** autoversion.py [--help] FILE [MACRO [MACRO ...]]
->
+> 
 > autoversion
->
+> 
 > **positional arguments:**
 > *FILE* Source file to modify (required)
 > *MACRO* Macros to modify (1 or more required)
->
-> **optional arguments:** --help, -?
+> 
+> **optional arguments:**   --help, -?
 
-CONFIGURING VISUAL STUDIO
+CONFIGURING VISUAL STUDIO (C/C++)
 -----------------------------------
-Comming Soon ...
+You can configure your Visual Studio project to run autoversion every time the project is built by following these instructions. Note that these instructions are assuming that your project is a C/C++ one, other language projects could have very different configuration windows.
+
+ 1. Right click on your project and select "Properties" or press ALT + ENTER with the project selected.
+ 2. Make sure the *Configuration* dropdown is set to "All Configurations" and that *Platform* is set to "All Platforms".
+ 3. On the left side select *Configuration Properties > Build Events > Pre-Build Event*.
+ 4. For the Command Line "autoversion.py "myversion.h MYDEF_PRODUCTVERSION"
+ 5. Make sure you put in the path for autoversion.py if it's not in the project's directory. Also make sure that you put in the path/filename of your header and the name of your #define in place of mine. Multiple definition arguments are possible.
+
+![Visual Studio Screen Shot](http://xeekworx.com/images/github/autoversion/autoversion_screenshot.png)
 
 > Written with [StackEdit](https://stackedit.io/).
