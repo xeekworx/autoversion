@@ -4,6 +4,8 @@ Autoversion
 
 **Autoversion is a command-line tool written in Python that looks for preprocessor definitions in a C/C++ header file and modifies the value to increment version values.**
 
+Note: Python 2.7+ is needs to be installed on the system that uses this utility.
+
 HOW IT WORKS
 ------------
 
