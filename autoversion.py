@@ -53,6 +53,9 @@ def main(argv = None):
     parser.add_argument('--pyversion', required=False,
                         action='store_true',
                         help='Display Python version')
+    parser.add_argument('--version', '-v', required=False,
+                        action='store_true',
+                        help='Display Python version')
     parser.add_argument('--help', '-?', action='help')
     try:
         args = parser.parse_args(argv)
@@ -62,6 +65,10 @@ def main(argv = None):
             raise
     except:
         return 1
+
+    # DISPLAY AUTOVERSION VERSION:
+    if args.version:
+        print("Autoversion Version %s" % __version__)
 
     # DISPLAY PYTHON VERSION:
     if args.pyversion:
