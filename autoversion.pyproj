@@ -13,8 +13,11 @@
     <Name>autoversion</Name>
     <RootNamespace>autoversion</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>"D:\Dropbox\Projects\Development\spacetheory\source\version_defs.h" SPACETHEORY_PRODUCTVERSION SPACETHEORY_STRPRODUCTVERSION</CommandLineArguments>
+    <CommandLineArguments>example.h MYAPP_PRODUCTVERSION MYAPP_STRPRODUCTVERSION --pyversion</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,8 +31,13 @@
     <Compile Include="autoversion.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="example.h" />
     <Content Include="LICENSE" />
     <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\2.7" />
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.5" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

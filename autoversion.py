@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 __author__ = 'jtullos'
-__version__ = '1.16.52'
+__version__ = '1.16.54'
 
 # The MIT License (MIT)
 # Copyright (c) 2016 John Andrew Tullos (xeek@xeekworx.com)
@@ -25,6 +25,7 @@ __version__ = '1.16.52'
 
 import sys
 import argparse
+import platform
 from datetime import *
 
 VERSION = __version__
@@ -49,22 +50,29 @@ def main(argv = None):
                         type=str, 
                         nargs='*', 
                         help='Macros to modify')
+    parser.add_argument('--pyversion', required=False,
+                        action='store_true',
+                        help='Display Python version')
     parser.add_argument('--help', '-?', action='help')
     try:
         args = parser.parse_args(argv)
         if len(args.macros) < 1:
             parser.print_usage()
-            print 'At least one macro argument is required.'
+            print('At least one macro argument is required.')
             raise
     except:
         return 1
+
+    # DISPLAY PYTHON VERSION:
+    if args.pyversion:
+        print("Python Version %s" % platform.python_version())
     
     # FILE PARSING
     try:
         file = open(args.source[0], "r+")
         source = file.readlines()
     except exception as e:
-        print 'Failed to open file. ' + e.msg
+        print('Failed to open file. ' + e.msg)
         return 1
 
     # C++ MACRO PARSING:
@@ -103,7 +111,7 @@ def main(argv = None):
                 modified_line = line.replace(macro_value, modified_macro_value)
                 new_source += modified_line
 
-                print "Line %d: Updated %s from '%s' to '%s'" % (line_number, values[1], macro_value, modified_macro_value)
+                print("Line %d: Updated %s from '%s' to '%s'" % (line_number, values[1], macro_value, modified_macro_value))
             else:
                 new_source += line
         line_number += 1
@@ -120,5 +128,5 @@ if __name__ == "__main__":
     try:
         sys.exit(main())
     except SystemExit:
-        sys.exc_clear()
+        pass
     
