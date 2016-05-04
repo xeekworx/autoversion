@@ -19,16 +19,18 @@
 // OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // Example header file to use in testing autoversion.py
+// The \0 is something that VS resource files used to require if these definitions
+// were included within it for version info.
 
-#define MYAPP_DEVSTAGE				"Alpha"
-#define MYAPP_PRODUCTVERSION		1,16,54,7
-#define MYAPP_STRPRODUCTVERSION		"1.16.54.7\0"
-#define MYAPP_FILEVERSION			MYAPP_PRODUCTVERSION
-#define MYAPP_STRFILEVERSION		MYAPP_STRPRODUCTVERSION
-#define MYAPP_FILEDESC				"My Application"
-#define MYAPP_PRODUCTNAME			"My Application\0"
-#define MYAPP_AUTHOR				"John A. Tullos\0"
-#define MYAPP_EMAIL					"xeek@xeekworx.com\0"
-#define MYAPP_COMPANY				"Xeekworx\0"
-#define MYAPP_COPYRIGHT				"Copyright © 2016 John Tullos. All Rights Reserved.\0"
-#define MYAPP_COPYRIGHT_SHORT		"Copyright © 2016 John Tullos.\0"
+#define MYAPP_DEVSTAGE            "Alpha"
+#define MYAPP_PRODUCTVERSION      1,16,54,7
+#define MYAPP_STRPRODUCTVERSION   "1.16.54.7\0"
+#define MYAPP_FILEVERSION         MYAPP_PRODUCTVERSION
+#define MYAPP_STRFILEVERSION      MYAPP_STRPRODUCTVERSION
+#define MYAPP_FILEDESC            "My Application"
+#define MYAPP_PRODUCTNAME         "My Application\0"
+#define MYAPP_AUTHOR              "John A. Tullos\0"
+#define MYAPP_EMAIL               "xeek@xeekworx.com\0"
+#define MYAPP_COMPANY             "Xeekworx\0"
+#define MYAPP_COPYRIGHT           "Copyright © 2016 John Tullos. All Rights Reserved.\0"
+#define MYAPP_COPYRIGHT_SHORT     "Copyright © 2016 John Tullos.\0"
