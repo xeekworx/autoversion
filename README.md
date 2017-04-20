@@ -1,4 +1,4 @@
-![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png)
+![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png) <br />
 Autoversion
 ===========
 
