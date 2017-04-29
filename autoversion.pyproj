@@ -13,11 +13,11 @@
     <Name>autoversion</Name>
     <RootNamespace>autoversion</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>example.h MYAPP_PRODUCTVERSION MYAPP_STRPRODUCTVERSION --pyversion</CommandLineArguments>
+    <CommandLineArguments>example.h MYAPP_PRODUCTVERSION MYAPP_STRPRODUCTVERSION --bdate_macro MYAPP_BUILDDATE</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <IsWindowsApplication>False</IsWindowsApplication>
-    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>{c4b1b7ee-0aa7-4c67-92ca-6a43c402d720}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\2.7" />
-    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.5" />
+    <InterpreterReference Include="{c4b1b7ee-0aa7-4c67-92ca-6a43c402d720}\3.5" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

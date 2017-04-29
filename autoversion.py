@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 __author__ = 'jtullos'
-__version__ = '1.16.54'
+__version__ = '1.17.429'
 
 # The MIT License (MIT)
 # Copyright (c) 2016 John Andrew Tullos (xeek@xeekworx.com)
@@ -27,6 +27,7 @@ import sys
 import argparse
 import platform
 from datetime import *
+import time
 
 VERSION = __version__
 DEFAULT_NAME = 'autoversion'
@@ -50,12 +51,17 @@ def main(argv = None):
                         type=str, 
                         nargs='*', 
                         help='Macros to modify')
+    parser.add_argument('--bdate_macro',
+                        metavar='MACRO',
+                        type=str,
+                        nargs=1,
+                        help='Build date macro')
     parser.add_argument('--pyversion', required=False,
                         action='store_true',
                         help='Display Python version')
     parser.add_argument('--version', '-v', required=False,
                         action='store_true',
-                        help='Display Python version')
+                        help='Display Autoversion version')
     parser.add_argument('--help', '-?', action='help')
     try:
         args = parser.parse_args(argv)
@@ -90,7 +96,19 @@ def main(argv = None):
             new_source += line
         else:
             values = line.split(None, 3) # value[0] = #define, value[1] = macro name, value[2] = data to modify
-            if len(values) > 2 and values[1] in args.macros:
+            if args.bdate_macro and values[1] in args.bdate_macro:
+                # Remove any quotes and trailing \0 if they exist:
+                macro_value = values[2].strip('"').replace('\\0', '')
+                # Determine modified value / New build date:
+                dt = datetime.now()
+                new_build_date = int(time.mktime(dt.timetuple()))
+                # Update:
+                modified_macro_value = str(new_build_date)
+                modified_line = line.replace(macro_value, modified_macro_value)
+                new_source += modified_line
+
+                print("Line %d: Updated %s from '%s' to '%s'" % (line_number, values[1], macro_value, modified_macro_value))
+            elif len(values) > 2 and values[1] in args.macros:
                 # Remove any quotes and trailing \0 if they exist:
                 macro_value = values[2].strip('"').replace('\\0', '')
                 # Determine the seperator being used:
