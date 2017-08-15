@@ -66,28 +66,31 @@ std::string get_builddate()
 Another feature, the upcopyright option, lets you keep the year or years updated in all of your copyright macros. The algorithm searches for the case insensitive string "copyright" in either the macro name or the macro's value. If you add -l or --lastyear to your options then only the year found at the end of your macro value will be changed. This is handy for those copyrights that have ranges (eg. 2016 - 2017).
 Here's what the macro might look like:
 ``` cpp
-#define MYAPP_COPYRIGHT "Copyright © 2017 John Tullos. All Rights Reserved.\0"
+#define MYAPP_COPYRIGHT "Copyright Â© 2017 John Tullos. All Rights Reserved.\0"
 ```
 
 COMMAND LINE
 ------------
-> **usage:** autoversion.py [--bdate_macro MACRO] [-c] [-l] [-p] [-v] [-?] FILE [MACRO [MACRO ...]]
-> 
-> Autoversion is a Python command-line tool that looks for preprocessor
-> definitions in a C/C++ header file and modifies the value to increment version
-> values, etc.
-> 
-> **positional arguments:**
-> *FILE* Source file to modify (required)
-> *MACRO* Version macros to modify (1 or more required)
-> 
-> **optional arguments:**
->  --bdate_macro MACRO  Build date macro
->  -c, --upcopyright    Update the year in copyrights
->  -l, --lastyear       Update only the last year found in copyrights
->  -p, --pyversion      Display Python version
->  -v, --version        Display Autoversion version
->  -?, --help
+```
+usage: autoversion.py [--bdate_macro MACRO] [-c] [-l] [-p] [-v] [-?]
+                      FILE [MACRO [MACRO ...]]
+
+Autoversion is a Python command-line tool that looks for preprocessor
+definitions in a C/C++ header file and modifies the value to increment version
+values, etc.
+
+positional arguments:
+  FILE                 Source file to modify
+  MACRO                Version macros to modify
+
+optional arguments:
+  --bdate_macro MACRO  Build date macro
+  -c, --upcopyright    Update the year in copyrights
+  -l, --lastyear       Update only the last year found in copyrights
+  -p, --pyversion      Display Python version
+  -v, --version        Display Autoversion version
+  -?, --help
+```
 
 CONFIGURING VISUAL STUDIO (C/C++)
 -----------------------------------
