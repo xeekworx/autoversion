@@ -23,9 +23,9 @@
 // were included within it for version info.
 
 #define MYAPP_DEVSTAGE            "Alpha"
-#define MYAPP_BUILDDATE			  1493508056
-#define MYAPP_PRODUCTVERSION      1,17,429,16
-#define MYAPP_STRPRODUCTVERSION   "1.17.429.16\0"
+#define MYAPP_BUILDDATE			  1502819643
+#define MYAPP_PRODUCTVERSION      1,17,815
+#define MYAPP_STRPRODUCTVERSION   "1.17.815\0"
 #define MYAPP_FILEVERSION         MYAPP_PRODUCTVERSION
 #define MYAPP_STRFILEVERSION      MYAPP_STRPRODUCTVERSION
 #define MYAPP_FILEDESC            "My Application"
