@@ -11,8 +11,9 @@
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-	<CommandLineArguments>example.h MYAPP_PRODUCTVERSION MYAPP_STRPRODUCTVERSION --bdate_macro MYAPP_BUILDDATE</CommandLineArguments>
+    <CommandLineArguments>-cl -v example.h MYAPP_PRODUCTVERSION MYAPP_STRPRODUCTVERSION --bdate_macro MYAPP_BUILDDATE</CommandLineArguments>
     <InterpreterId>Global|PythonCore|3.6</InterpreterId>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -25,8 +26,6 @@
   <ItemGroup>
     <Content Include="example.h" />
     <Content Include="LICENSE" />
-			  
-			 
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>

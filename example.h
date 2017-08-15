@@ -23,9 +23,9 @@
 // were included within it for version info.
 
 #define MYAPP_DEVSTAGE            "Alpha"
-#define MYAPP_BUILDDATE			  1502819643
-#define MYAPP_PRODUCTVERSION      1,17,815
-#define MYAPP_STRPRODUCTVERSION   "1.17.815\0"
+#define MYAPP_BUILDDATE			  1502823934
+#define MYAPP_PRODUCTVERSION      1,17,815,0
+#define MYAPP_STRPRODUCTVERSION   "1.17.815.0\0"
 #define MYAPP_FILEVERSION         MYAPP_PRODUCTVERSION
 #define MYAPP_STRFILEVERSION      MYAPP_STRPRODUCTVERSION
 #define MYAPP_FILEDESC            "My Application"
@@ -35,4 +35,5 @@
 #define MYAPP_COMPANY             "Xeekworx\0"
 #define MYAPP_COPYRIGHT           "Copyright © 2016 John Tullos. All Rights Reserved.\0"
 #define MYAPP_COPYRIGHT_SHORT     "Copyright © 2016 John Tullos.\0"
+#define MYAPP_CP_DETECT_TEST      "Copyright © 2015, 2016, 2016 John Tullos.\0"
 

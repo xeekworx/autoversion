@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 __author__ = 'jtullos'
-__version__ = '1.17.429'
+__version__ = '1.17.815'
 
 # The MIT License (MIT)
-# Copyright (c) 2016 John Andrew Tullos (xeek@xeekworx.com)
+# Copyright (c) 2017 John Andrew Tullos (xeek@xeekworx.com)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -28,9 +28,13 @@ import argparse
 import platform
 from datetime import *
 import time
+import re
 
 VERSION = __version__
 DEFAULT_NAME = 'autoversion'
+DEFAULT_DESC = ('{} is a Python command-line tool that looks for '
+                'preprocessor definitions in a C/C++ header file and modifies '
+                'the value to increment version values, etc.'.format(DEFAULT_NAME.title()))
 
 
 def main(argv = None):
@@ -39,7 +43,7 @@ def main(argv = None):
     if not argv:
         argv = sys.argv[1:]
 
-    parser = argparse.ArgumentParser(description = DEFAULT_NAME, 
+    parser = argparse.ArgumentParser(description = DEFAULT_DESC, 
                                      add_help = False)
     parser.add_argument('source',
                         metavar='FILE', 
@@ -50,19 +54,25 @@ def main(argv = None):
                         metavar='MACRO', 
                         type=str, 
                         nargs='*', 
-                        help='Macros to modify')
+                        help='Version macros to modify')
     parser.add_argument('--bdate_macro',
                         metavar='MACRO',
                         type=str,
                         nargs=1,
                         help='Build date macro')
-    parser.add_argument('--pyversion', required=False,
+    parser.add_argument('-c', '--upcopyright', required=False,
+                        action='store_true',
+                        help='Update the year in copyrights')
+    parser.add_argument('-l', '--lastyear', required=False,
+                        action='store_true',
+                        help='Update only the last year found in copyrights')
+    parser.add_argument('-p', '--pyversion', required=False,
                         action='store_true',
                         help='Display Python version')
-    parser.add_argument('--version', '-v', required=False,
+    parser.add_argument('-v', '--version', required=False,
                         action='store_true',
                         help='Display Autoversion version')
-    parser.add_argument('--help', '-?', action='help')
+    parser.add_argument('-?', '--help', action='help')
     try:
         args = parser.parse_args(argv)
         if len(args.macros) < 1:
@@ -95,10 +105,12 @@ def main(argv = None):
         if not line.strip().startswith('#define'):
             new_source += line
         else:
-            values = line.split(None, 3) # value[0] = #define, value[1] = macro name, value[2] = data to modify
+            values = line.split(None, 2) # value[0] = #define, value[1] = macro name, value[2] = data to modify
+            if len(values) < 3:
+                new_source += line
             if args.bdate_macro and values[1] in args.bdate_macro:
                 # Remove any quotes and trailing \0 if they exist:
-                macro_value = values[2].strip('"').replace('\\0', '')
+                macro_value = values[2].replace('\\0', '').replace('\n', '').strip('"')
                 # Determine modified value / New build date:
                 dt = datetime.now()
                 new_build_date = int(time.mktime(dt.timetuple()))
@@ -107,15 +119,51 @@ def main(argv = None):
                 modified_line = line.replace(macro_value, modified_macro_value)
                 new_source += modified_line
 
-                print("Line %d: Updated %s from '%s' to '%s'" % (line_number, values[1], macro_value, modified_macro_value))
+                print("Line {}: Updated {} from '{}' to '{}'".format(line_number, values[1], macro_value, modified_macro_value))
+            elif args.upcopyright and ('copyright' in values[1].lower() or 'copyright' in values[2].lower()):
+                macro_value = values[2].replace('\\0', '').replace('\n', '').strip('"')
+                # Current year:
+                current_year = str(date.today().year)
+                # Find all of the detected years in the order found (left-to-right):
+                year_list = re.findall(r"[0-9]{4,4}", macro_value)
+                # If there aren't any years, we should probably not do anything.
+                if not year_list:
+                    new_source += line
+                    print("Line {}: {} NOT Updated. Copyright had no year in it!".format(line_number, values[1]))
+                else:
+                    if args.lastyear:
+                        # Replace only the last occurance of a year with the current year:
+                        yearpos = macro_value.rfind(year_list[-1])
+                        modified_macro_value = "{}{}{}".format(
+                            macro_value[:yearpos],
+                            current_year,
+                            macro_value[yearpos+4:]
+                            )
+
+                        print("Line {}: Updated {} year from '{}' to '{}'".format(line_number, values[1], macro_value[yearpos:yearpos+4], current_year))
+                    else:
+                        # Creating a set of all of the years to remove duplicates:
+                        year_set = set(year_list)
+                        # Replace every found year with the current year:
+                        modified_macro_value = macro_value
+                        for year in year_set:
+                            modified_macro_value = modified_macro_value.replace(year, current_year)
+
+                        print("Line {}: Updated {} year(s) from '{}' to '{}'".format(line_number, values[1], ', '.join(year_set), current_year))
+
+                    # Update:
+                    modified_line = line.replace(macro_value, modified_macro_value)
+                    new_source += modified_line
+
             elif len(values) > 2 and values[1] in args.macros:
                 # Remove any quotes and trailing \0 if they exist:
-                macro_value = values[2].strip('"').replace('\\0', '')
+                macro_value = values[2].replace('\\0', '').replace('\n', '').strip('"')
                 # Determine the seperator being used:
                 separator = '.'
                 for c in macro_value:
                     if not c.isdigit():
                         separator = c
+                        break
                 # Get value parts:
                 parts = macro_value.split(separator, 4)
                 # [0] Major:    This is usually left alone and changed manually by the developer,
@@ -136,7 +184,7 @@ def main(argv = None):
                 modified_line = line.replace(macro_value, modified_macro_value)
                 new_source += modified_line
 
-                print("Line %d: Updated %s from '%s' to '%s'" % (line_number, values[1], macro_value, modified_macro_value))
+                print("Line {}: Updated {} from '{}' to '{}'".format(line_number, values[1], macro_value, modified_macro_value))
             else:
                 new_source += line
         line_number += 1
