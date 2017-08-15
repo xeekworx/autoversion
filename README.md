@@ -1,5 +1,5 @@
-![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png) <br />
-Autoversion
+<img width="300" alt="Xeekworx" src="https://github.com/xeekworx/autoversion/raw/master/graphics/xeekworx_logo.png"><br />
+<img width="300" alt="Autoversion" src="https://github.com/xeekworx/autoversion/raw/master/graphics/autoversion_logo.png">
 ===========
 
 **Autoversion is a command-line tool written in Python that looks for preprocessor definitions in a C/C++ header file and modifies the value to increment version values.**
