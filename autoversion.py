@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 __author__ = 'jtullos'
-__version__ = '1.17.815'
+__version__ = '1.24.214'
 
 # The MIT License (MIT)
-# Copyright (c) 2017 John Andrew Tullos (xeek@xeekworx.com)
+# Copyright (c) 2024 John Andrew Tullos (xeek@xeekworx.com)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 # software and associated documentation files (the "Software"), to deal in the Software 
@@ -94,7 +94,7 @@ def main(argv = None):
     try:
         file = open(args.source[0], "r+")
         source = file.readlines()
-    except exception as e:
+    except sys.exception as e:
         print('Failed to open file. ' + e.msg)
         return 1
 
